@@ -84,6 +84,61 @@
   height: 100%;
   border: none;
   }
+  .loader {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.loader p {
+  margin-top: 20px;
+  color: #000000;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  text-align: center;
+}
+
+/* CORAZÓN */
+.heart {
+  width: 60px;
+  height: 60px;
+  background: #e63946;
+  transform: rotate(-45deg);
+  position: relative;
+  animation: pulse 1.4s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #e63946;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -30px;
+  left: 0;
+}
+
+.heart::after {
+  left: 30px;
+  top: 0;
+}
+
+@keyframes pulse {
+  0% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(1.15); }
+  100% { transform: rotate(-45deg) scale(1); }
+}
+
 
 </style>
 </head>
@@ -91,23 +146,52 @@
 <body>
 
 <div class="landscape-wrapper">
-    <button class="home-btn" onclick="volverHome()" aria-label="Inicio">
-    <span><B>X</B></span>
-  </button>
-  <div class="video-box">
 
-  <iframe
-    src="https://drive.google.com/file/d/1lsyqZJYZu_g_q1FLZ50ZEu89g4kgvMDm/preview"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="heart"></div>
+    <p>Cargando un recuerdo que quiero compartir contigo…</p>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-box" id="videoBox" style="display:none;">
+
+    <button class="home-btn" onclick="volverHome()">
+      <span><B>X</B></span>
+    </button>
+
+    <iframe
+      id="videoFrame"
+      src="https://drive.google.com/file/d/1lsyqZJYZu_g_q1FLZ50ZEu89g4kgvMDm/preview"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
+
+  </div>
 
 </div>
+
 
 
 </div>
 
 <script>
+  function volverHome() {
+    window.location.href = "index.html";
+  }
+
+  const frame = document.getElementById("videoFrame");
+  const loader = document.getElementById("loader");
+  const videoBox = document.getElementById("videoBox");
+
+  frame.addEventListener("load", () => {
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+      videoBox.style.display = "block";
+    }, 500);
+  });
+
   function volverHome() {
     window.location.href = "index.html";
   }
