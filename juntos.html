@@ -79,28 +79,31 @@
   .home-btn:active {
     transform: scale(0.95);
   }
+  iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  }
+
 </style>
 </head>
 
 <body>
 
 <div class="landscape-wrapper">
-    
-  <div class="video-box">
     <button class="home-btn" onclick="volverHome()" aria-label="Inicio">
-      <span><strong>X</strong></span>
-    </button>
-    
+    <span><B>X</B></span>
+  </button>
+  <div class="video-box">
 
-    <video
-      src="video.mp4"
-      controls
-      playsinline
-      preload="metadata">
-      Tu navegador no soporta video HTML5.
-    </video>
+  <iframe
+    src="https://drive.google.com/file/d/1lsyqZJYZu_g_q1FLZ50ZEu89g4kgvMDm/preview"
+    allow="autoplay"
+    allowfullscreen>
+  </iframe>
 
-  </div>
+</div>
+
 
 </div>
 
